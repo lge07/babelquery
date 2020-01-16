@@ -62,6 +62,10 @@ def getSynsetIdsFromResourceId(rid,searchLang,targetLang,pos,source,wnVersion,ke
 
 def getEdges(rid,key):
     c = "https://babelnet.io/v5/getOutgoingEdges?id={synsetId}&key={key}"
-    return json.loads(requests.get(c.format(synsetId = rid, key = key)).text)
+    data = json.loads(requests.get(c.format(synsetId = rid, key = key)).text)
+    ret = []
+    for x in data:
+        ret.append(x["target"])
+    return ret
 
 
